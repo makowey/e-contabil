@@ -10,21 +10,21 @@
 
     let total = {incasari: 0, taxe: 0, net: 0};
 
+    let plafonNumarLuni = 24;
+
     let incasari = 0;
     $: incasari = rate * hours * curs;
     let impozit = 0;
     $: impozit = Math.round(0.10 * incasari);
     let CAS = 0;
-    $: CAS = Math.round(0.10 * salariuMinim * 36) + (incasari > plafonBrut ? Math.round(0.10 * (incasari - plafonBrut)) : 0);
+    $: CAS = Math.round(0.10 * salariuMinim * plafonNumarLuni) + (incasari > plafonBrut ? Math.round(0.10 * (incasari - plafonBrut)) : 0);
     let CNASS = 0;
-    $: CNASS = Math.round(0.25 * salariuMinim * 36);
+    $: CNASS = Math.round(0.25 * salariuMinim * plafonNumarLuni);
     let taxe = 0;
-    $: taxe = impozit + CAS + CNASS, console.log(taxe);
+    $: taxe = impozit + CAS + CNASS;
     let net;
     $: net = incasari - taxe;
     $: net = net > 0 ? net : 0;
-
-    let plafonLuni = 24;
 
     $: total = {incasari, taxe, net}
 </script>
@@ -40,9 +40,12 @@
             <h3 class="h3">Cod fiscal 2023 ({type})</h3>
             <ul class="list">
                 <li>Impozit pe venit - 10%</li>
-                <li>CAS plafonat la {plafonLuni} de salarii minime pe economie - 10%</li>
-                <li>CNASS plafonat la {plafonLuni} de salarii minime pe economie - 25%</li>
-                <li class="text-xs italic text-lime-300">Propunere: In cazul PFA, se mențin plafoanele actuale de 24 de salarii pentru plata CAS si CASS, dar daca venitul net depășește 60.000 euro, se plătește CASS pentru diferența de venit peste 60.000 euro.</li>
+                <li>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 10%</li>
+                <li>CNASS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25%</li>
+                <li class="text-xs italic text-lime-300">Propunere: In cazul PFA, se mențin plafoanele actuale de 24 de
+                    salarii pentru plata CAS si CASS, dar daca venitul net depășește 60.000 euro, se plătește CASS
+                    pentru diferența de venit peste 60.000 euro.
+                </li>
             </ul>
         </div>
     </aside>
@@ -66,7 +69,7 @@
 
     <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
         <div class="input-group-shim">Plafonare(luni)</div>
-        <input type="number" placeholder="numar de luni" bind:value={plafonLuni}/>
+        <input type="number" placeholder="numar de luni" bind:value={plafonNumarLuni}/>
     </div>
 
     <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
@@ -90,11 +93,11 @@
             <td>{impozit}</td>
         </tr>
         <tr>
-            <td>CAS plafonat la {plafonLuni} de salarii minime pe economie - 10%</td>
+            <td>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 10%</td>
             <td>{CAS}</td>
         </tr>
         <tr>
-            <td>CNASS plafonat la {plafonLuni} de salarii minime pe economie - 25%</td>
+            <td>CNASS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25%</td>
             <td>{CNASS}</td>
         </tr>
         </tbody>
@@ -102,15 +105,18 @@
         <tfoot>
         <tr>
             <th colspan="1">Venitul brut realizat</th>
-            <td>{total.incasari.toLocaleString("ro-RO")} lei {total.incasari > 0 ? '(' + Math.round(total.incasari / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
+            <td>{total.incasari.toLocaleString("ro-RO")}
+                lei {total.incasari > 0 ? '(' + Math.round(total.incasari / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
         </tr>
         <tr>
             <th colspan="1">Taxe</th>
-            <td>{total.taxe.toLocaleString("ro-RO")} lei {total.taxe > 0 ? '(' + Math.round(total.taxe / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
+            <td>{total.taxe.toLocaleString("ro-RO")}
+                lei {total.taxe > 0 ? '(' + Math.round(total.taxe / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
         </tr>
         <tr>
             <th colspan="1">Venitul net realizat</th>
-            <td>{total.net.toLocaleString("ro-RO")} lei {total.net > 0 ? '(' + Math.round(total.net / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
+            <td>{total.net.toLocaleString("ro-RO")}
+                lei {total.net > 0 ? '(' + Math.round(total.net / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
         </tr>
         </tfoot>
     </table>
