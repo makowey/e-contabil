@@ -116,8 +116,20 @@
         <tr>
             <th colspan="1">Venitul net realizat</th>
             <td>{total.net.toLocaleString("ro-RO")}
-                lei {total.net > 0 ? '(' + Math.round(total.net / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
+                lei {total.net > 0 ? '(' + Math.round(total.net / curs).toLocaleString("ro-RO") + '€)' : '' }
+            </td>
         </tr>
         </tfoot>
     </table>
+
+    {#if total.net > 0}
+        <p class="text-xs italic text-cyan-400 max-w-4xl text-center m-0 m-auto">
+            Venitul net realizat este echivalentul unui CIM(contract de munca) cu
+            salariul net de {Math.round(total.net / 12).toLocaleString("ro-RO")} lei
+            ({Math.round(total.net / 12 / curs).toLocaleString("ro-RO")}€) pe luna in conditiile in care ca si
+            angajat se beneficiaza de cel putin 21 de zile lucratoare( + zile libere oficiale). Ca si angajat trebuie
+            luat in calcul si alte beneficii care nu vin in sarcina angajatului: bonuri de masa, vouchere de vacanta,
+            comisioane, al 13-lea salariu, etc...
+        </p>
+    {/if}
 </div>
