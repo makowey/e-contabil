@@ -17,19 +17,21 @@
     let impozit = 0;
     $: impozit = Math.round(0.10 * incasari);
     let CAS = 0;
-    $: CAS = Math.round(0.10 * salariuMinim * plafonNumarLuni) + (incasari > plafonBrut ? Math.round(0.10 * (incasari - plafonBrut)) : 0);
-    let CNASS = 0;
-    $: CNASS = Math.round(0.25 * salariuMinim * plafonNumarLuni);
+    $: CAS = Math.round(0.25 * salariuMinim * plafonNumarLuni) + (incasari > plafonBrut ? Math.round(0.10 * (incasari - plafonBrut)) : 0);
+    let CASS = 0;
+    $: CASS = Math.round(0.10 * salariuMinim * plafonNumarLuni);
     let taxe = 0;
-    $: taxe = impozit + CAS + CNASS;
+    $: taxe = impozit + CAS + CASS;
     let net;
     $: net = incasari - taxe;
     $: net = net > 0 ? net : 0;
 
+    $: plafonNumarLuni = incasari > (24 * salariuMinim) ? 24 : 12;
+
     $: total = {incasari, taxe, net}
 </script>
 
-<div>
+<div class="w-3/4 lg:w-full text-left lg:text-center">
     <aside class="alert variant-filled-surface">
         <!-- Icon -->
         <div>
@@ -40,8 +42,8 @@
             <h3 class="h3">Cod fiscal 2023 ({type})</h3>
             <ul class="list">
                 <li>Impozit pe venit - 10%</li>
-                <li>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 10%</li>
-                <li>CNASS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25%</li>
+                <li>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25%</li>
+                <li>CASS plafonat la {plafonNumarLuni} de salarii minime pe economie - 10%</li>
                 <li class="text-xs italic text-lime-300">Propunere: In cazul PFA, se mențin plafoanele actuale de 24 de
                     salarii pentru plata CAS si CASS, dar daca venitul net depășește 60.000 euro, se plătește CASS
                     pentru diferența de venit peste 60.000 euro.
@@ -78,7 +80,7 @@
     </div>
 </div>
 
-<div class="table-container">
+<div class="table-container w-94 lg:w-full">
     <!-- Native Table Element -->
     <table class="table table-hover">
         <thead>
@@ -93,12 +95,12 @@
             <td>{impozit}</td>
         </tr>
         <tr>
-            <td>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 10%</td>
+            <td>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25%</td>
             <td>{CAS}</td>
         </tr>
         <tr>
-            <td>CNASS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25%</td>
-            <td>{CNASS}</td>
+            <td>CASS plafonat la {plafonNumarLuni} de salarii minime pe economie - 10%</td>
+            <td>{CASS}</td>
         </tr>
         </tbody>
 
