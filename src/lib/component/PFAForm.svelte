@@ -1,5 +1,6 @@
 <script>
     import Icon from '@iconify/svelte';
+    import {SlideToggle} from "@skeletonlabs/skeleton";
 
     export let curs = 4.95;
     export let salariuMinim = 3000;
@@ -29,6 +30,8 @@
     $: plafonNumarLuni = incasari > (24 * salariuMinim) ? 24 : 12;
 
     $: total = {incasari, taxe, net}
+
+    let euro = true;
 </script>
 
 <div class="w-3/4 lg:w-full text-left lg:text-center">
@@ -51,6 +54,10 @@
             </ul>
         </div>
     </aside>
+</div>
+
+<div class="m-auto absolute right-0.5 top-7">
+    <SlideToggle name="slider-xs" bind:checked={euro} active="bg-primary-500" size="xs" />
 </div>
 
 <div class="flex gap-10">
@@ -92,15 +99,16 @@
         <tbody>
         <tr>
             <td>Impozit pe venit - 10%</td>
-            <td>{impozit}</td>
+            <td>{impozit}
+                lei {impozit > 0 && euro ? '(' + Math.round(impozit / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
         </tr>
         <tr>
             <td>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25%</td>
-            <td>{CAS}</td>
+            <td>{CAS} lei {CAS > 0 && euro ? '(' + Math.round(CAS / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
         </tr>
         <tr>
             <td>CASS plafonat la {plafonNumarLuni} de salarii minime pe economie - 10%</td>
-            <td>{CASS}</td>
+            <td>{CASS} lei {CASS > 0 && euro ? '(' + Math.round(CASS / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
         </tr>
         </tbody>
 
@@ -108,17 +116,17 @@
         <tr>
             <th colspan="1">Venitul brut realizat</th>
             <td>{total.incasari.toLocaleString("ro-RO")}
-                lei {total.incasari > 0 ? '(' + Math.round(total.incasari / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
+                lei {total.incasari > 0 && euro ? '(' + Math.round(total.incasari / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
         </tr>
         <tr>
             <th colspan="1">Taxe</th>
             <td>{total.taxe.toLocaleString("ro-RO")}
-                lei {total.taxe > 0 ? '(' + Math.round(total.taxe / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
+                lei {total.taxe > 0 && euro ? '(' + Math.round(total.taxe / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
         </tr>
         <tr>
             <th colspan="1">Venitul net realizat</th>
             <td>{total.net.toLocaleString("ro-RO")}
-                lei {total.net > 0 ? '(' + Math.round(total.net / curs).toLocaleString("ro-RO") + '€)' : '' }
+                lei {total.net > 0 && euro ? '(' + Math.round(total.net / curs).toLocaleString("ro-RO") + '€)' : '' }
             </td>
         </tr>
         </tfoot>
