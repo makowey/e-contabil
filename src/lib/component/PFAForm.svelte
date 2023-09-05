@@ -34,6 +34,8 @@
     $: plafonNumarLuni = incasari > (24 * salariuMinim) ? 24 : 12;
 
     $: total = {incasari, taxe, net}
+    let percentage = 0;
+    $: percentage = ((total.net / total.incasari) * 100).toPrecision(4).toLocaleString()
 
     let euro = true;
 </script>
@@ -128,12 +130,12 @@
                 lei {total.incasari > 0 && euro ? '(' + Math.round(total.incasari / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
         </tr>
         <tr>
-            <th colspan="1">Taxe</th>
+            <th colspan="1">Taxe ({(100 - percentage).toPrecision(4)}%)</th>
             <td>{total.taxe.toLocaleString("ro-RO")}
                 lei {total.taxe > 0 && euro ? '(' + Math.round(total.taxe / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
         </tr>
         <tr>
-            <th colspan="1">Venitul net realizat</th>
+            <th colspan="1">Venitul net realizat ({percentage}%)</th>
             <td>{total.net.toLocaleString("ro-RO")}
                 lei {total.net > 0 && euro ? '(' + Math.round(total.net / curs).toLocaleString("ro-RO") + '€)' : '' }
             </td>
