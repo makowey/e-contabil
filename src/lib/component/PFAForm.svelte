@@ -15,12 +15,16 @@
 
     let incasari = 0;
     $: incasari = rate * hours * curs;
-    let impozit = 0;
-    $: impozit = Math.round(0.10 * incasari);
     let CAS = 0;
     $: CAS = Math.round(0.25 * salariuMinim * plafonNumarLuni) + (incasari > plafonBrut ? Math.round(0.10 * (incasari - plafonBrut)) : 0);
     let CASS = 0;
     $: CASS = Math.round(0.10 * salariuMinim * plafonNumarLuni);
+
+    let deductibil = 0;
+
+    let impozit = 0;
+    $: impozit = Math.round(0.10 * (incasari - CAS - deductibil));
+
     let taxe = 0;
     $: taxe = impozit + CAS + CASS;
     let net;
@@ -45,7 +49,7 @@
             <h3 class="h3">Cod fiscal 2023 ({type})</h3>
             <ul class="list">
                 <li>Impozit pe venit - 10%</li>
-                <li>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25%</li>
+                <li>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25% (deductibil)</li>
                 <li>CASS plafonat la {plafonNumarLuni} de salarii minime pe economie - 10%</li>
                 <li class="text-xs italic text-lime-300">Propunere: In cazul PFA, se mențin plafoanele actuale de 24 de
                     salarii pentru plata CAS si CASS, dar daca venitul net depășește 60.000 euro, se plătește CASS
@@ -57,7 +61,7 @@
 </div>
 
 <div class="m-auto absolute right-0.5 top-7">
-    <SlideToggle name="slider-xs" bind:checked={euro} active="bg-primary-500" size="xs" />
+    <SlideToggle name="slider-xs" bind:checked={euro} active="bg-primary-500" size="xs"/>
 </div>
 
 <div class="flex gap-10">
@@ -82,6 +86,11 @@
     </div>
 
     <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
+        <div class="input-group-shim truncate">Cheltuieli deductibile</div>
+        <input type="number" placeholder="cheltuieli deductibile" bind:value={deductibil}/>
+    </div>
+
+    <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
         <div class="input-group-shim">Curs valutar(€)</div>
         <input type="number" placeholder="in lei..." bind:value={curs}/>
     </div>
@@ -103,7 +112,7 @@
                 lei {impozit > 0 && euro ? '(' + Math.round(impozit / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
         </tr>
         <tr>
-            <td>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25%</td>
+            <td>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25% (deductibil)</td>
             <td>{CAS} lei {CAS > 0 && euro ? '(' + Math.round(CAS / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
         </tr>
         <tr>
