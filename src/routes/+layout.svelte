@@ -14,7 +14,7 @@
 			<svelte:fragment slot="trail">
 				<a
 					class="btn btn-sm variant-ghost-surface"
-					href="mailto:makowey@gmail.com"
+					href="mailto:makowey@games.com"
 					target="_blank"
 					rel="noreferrer"
 				>

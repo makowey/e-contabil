@@ -42,7 +42,7 @@
                 <li>Impozit pe venit - 10%</li>
                 <li>CAS plafonat la {plafonLuni} de salarii minime pe economie - 10%</li>
                 <li>CNASS plafonat la {plafonLuni} de salarii minime pe economie - 25%</li>
-                <li class="text-xs italic">Propunere: In cazul PFA, se mențin plafoanele actuale de 24 de salarii pentru plata CAS si CASS, dar daca venitul net depășește 60.000 euro, se plătește CASS pentru diferența de venit peste 60.000 euro.</li>
+                <li class="text-xs italic text-lime-300">Propunere: In cazul PFA, se mențin plafoanele actuale de 24 de salarii pentru plata CAS si CASS, dar daca venitul net depășește 60.000 euro, se plătește CASS pentru diferența de venit peste 60.000 euro.</li>
             </ul>
         </div>
     </aside>

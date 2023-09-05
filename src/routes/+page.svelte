@@ -1,5 +1,5 @@
 <script>
-	import PfaForm from "$lib/component/PfaForm.svelte";
+	import PfaForm from "$lib/component/PFAForm.svelte";
 </script>
 
 <!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
