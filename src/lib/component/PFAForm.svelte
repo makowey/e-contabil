@@ -14,6 +14,8 @@
     let total = {incasari: 0, taxe: 0, net: 0};
 
     let plafonNumarLuni = 24;
+    let luniPrestate = 1;
+    $: luniPrestate = (hours / 8 / 21).toFixed(1);
 
     let incasari = 0;
     $: incasari = rate * hours * curs;
@@ -37,7 +39,10 @@
 
     $: total = {incasari, taxe, net}
     let percentage = 0;
-    $: percentage = ((total.net / total.incasari) * 100).toPrecision(4).toLocaleString()
+    $: percentage = ((total.net / total.incasari) * 100).toFixed(2).toLocaleString()
+
+    let progressBar;
+    $: progressBar = undefined, setTimeout(() => progressBar = percentage, 1000);
 
     let euro = true;
 </script>
@@ -72,13 +77,16 @@
     <main>
         <div class="grid grid-cols-2 justify-between gap-2 text-md pb-2">
             <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-                <div class="input-group-shim w-72">Rate/h (€) <span class="text-xs">{(rate * curs).toPrecision(4)}
+                <div class="input-group-shim w-72">Rate/h (€) <span class="text-xs">{(rate * curs).toFixed(2)}
                     lei/ora</span></div>
                 <input type="number" placeholder="in euro(€)..." bind:value={rate}/>
             </div>
 
             <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-                <div class="input-group-shim w-72">Ore/an <span class="text-xs">{(hours / 8)} zile = ~{hours / 8 / 21} luni</span></div>
+                <div class="input-group-shim w-72">Ore/an <span
+                        class="text-xs w-3/4">echivalentul a {(hours / 8).toFixed(1)}
+                    zile / ~{luniPrestate} luni de CIM (8h/zi)</span>
+                </div>
                 <input type="number" placeholder="ex: 1848 = 21 * 11 luni * 8 ore" bind:value={hours}/>
             </div>
 
@@ -139,13 +147,15 @@
                         lei {total.incasari > 0 && euro ? '(' + Math.round(total.incasari / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
                 </tr>
                 <tr>
-                    <th colspan="1">Taxe ({(100 - percentage).toPrecision(4)}%)</th>
+                    <th colspan="1">Taxe ({(100 - percentage).toFixed(2)}%)</th>
                     <td class="text-right">{total.taxe.toLocaleString("ro-RO")}
                         lei {total.taxe > 0 && euro ? '(' + Math.round(total.taxe / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
                 </tr>
                 <tr>
                     <th colspan="1">Venitul net realizat ({percentage}%)
-                        <ProgressBar label="Progress Bar" value={percentage} max={100} meter="bg-fuchsia-600"
+                        <ProgressBar label="Progress Bar"
+                                     value={progressBar}
+                                     max={100} meter="bg-fuchsia-600"
                                      track="bg-error-50-900-token"/>
                     </th>
                     <td class="text-right font-bold text-indigo-100 animate-pulse">{total.net.toLocaleString("ro-RO")}
