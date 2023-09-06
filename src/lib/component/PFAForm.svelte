@@ -1,6 +1,7 @@
 <script>
     import Icon from '@iconify/svelte';
-    import {SlideToggle} from "@skeletonlabs/skeleton";
+    import {isMobile} from "$lib/stores.js";
+    import LottieAnimation from "$lib/player/LottieAnimation.svelte";
 
     export let curs = 4.95;
     export let salariuMinim = 3000;
@@ -62,95 +63,102 @@
     </aside>
 </div>
 
-<div class="m-auto absolute right-0.5 top-7">
-    <SlideToggle name="slider-xs" bind:checked={euro} active="bg-primary-500" size="xs"/>
-</div>
+{#if $isMobile}
+    <p>Momentan, formularul nu suporta interfata mobila...</p>
+    <LottieAnimation path="portrait_landscape"/>
+{:else }
+    <main>
+        <div class="flex gap-10">
+            <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
+                <div class="input-group-shim">Rate/h</div>
+                <input type="number" placeholder="in euro(€)..." bind:value={rate}/>
+            </div>
 
-<div class="flex gap-10">
-    <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-        <div class="input-group-shim">Rate/h</div>
-        <input type="number" placeholder="in euro(€)..." bind:value={rate}/>
-    </div>
+            <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
+                <div class="input-group-shim">Ore/an</div>
+                <input type="number" placeholder="ex: 1848 = 21 * 11 luni * 8 ore" bind:value={hours}/>
+            </div>
 
-    <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-        <div class="input-group-shim">Ore/an</div>
-        <input type="number" placeholder="ex: 1848 = 21 * 11 luni * 8 ore" bind:value={hours}/>
-    </div>
+            <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
+                <div class="input-group-shim">Salariu minim</div>
+                <input type="number" placeholder="salariu minim pe economie" bind:value={salariuMinim}/>
+            </div>
 
-    <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-        <div class="input-group-shim">Salariu minim</div>
-        <input type="number" placeholder="salariu minim pe economie" bind:value={salariuMinim}/>
-    </div>
+            <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
+                <div class="input-group-shim">Plafonare(luni)</div>
+                <input type="number" placeholder="numar de luni" bind:value={plafonNumarLuni}/>
+            </div>
 
-    <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-        <div class="input-group-shim">Plafonare(luni)</div>
-        <input type="number" placeholder="numar de luni" bind:value={plafonNumarLuni}/>
-    </div>
+            <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
+                <div class="input-group-shim truncate">Cheltuieli deductibile</div>
+                <input type="number" placeholder="cheltuieli deductibile" bind:value={deductibil}/>
+            </div>
 
-    <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-        <div class="input-group-shim truncate">Cheltuieli deductibile</div>
-        <input type="number" placeholder="cheltuieli deductibile" bind:value={deductibil}/>
-    </div>
+            <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
+                <div class="input-group-shim">Curs valutar(€)</div>
+                <input type="number" placeholder="in lei..." bind:value={curs}/>
+            </div>
+        </div>
 
-    <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-        <div class="input-group-shim">Curs valutar(€)</div>
-        <input type="number" placeholder="in lei..." bind:value={curs}/>
-    </div>
-</div>
+        <div class="table-container w-94 lg:w-full">
+            <!-- Native Table Element -->
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Descriere</th>
+                    <th>Suma</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Impozit pe venit - 10%</td>
+                    <td>{impozit}
+                        lei {impozit > 0 && euro ? '(' + Math.round(impozit / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
+                </tr>
+                <tr>
+                    <td>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25% (deductibil)</td>
+                    <td>{CAS}
+                        lei {CAS > 0 && euro ? '(' + Math.round(CAS / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
+                </tr>
+                <tr>
+                    <td>CASS plafonat la {plafonNumarLuni} de salarii minime pe economie - 10%</td>
+                    <td>{CASS}
+                        lei {CASS > 0 && euro ? '(' + Math.round(CASS / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
+                </tr>
+                </tbody>
 
-<div class="table-container w-94 lg:w-full">
-    <!-- Native Table Element -->
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>Descriere</th>
-            <th>Suma</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Impozit pe venit - 10%</td>
-            <td>{impozit}
-                lei {impozit > 0 && euro ? '(' + Math.round(impozit / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
-        </tr>
-        <tr>
-            <td>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25% (deductibil)</td>
-            <td>{CAS} lei {CAS > 0 && euro ? '(' + Math.round(CAS / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
-        </tr>
-        <tr>
-            <td>CASS plafonat la {plafonNumarLuni} de salarii minime pe economie - 10%</td>
-            <td>{CASS} lei {CASS > 0 && euro ? '(' + Math.round(CASS / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
-        </tr>
-        </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="1">Venitul brut realizat</th>
+                    <td>{total.incasari.toLocaleString("ro-RO")}
+                        lei {total.incasari > 0 && euro ? '(' + Math.round(total.incasari / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
+                </tr>
+                <tr>
+                    <th colspan="1">Taxe ({(100 - percentage).toPrecision(4)}%)</th>
+                    <td>{total.taxe.toLocaleString("ro-RO")}
+                        lei {total.taxe > 0 && euro ? '(' + Math.round(total.taxe / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
+                </tr>
+                <tr>
+                    <th colspan="1">Venitul net realizat ({percentage}%)</th>
+                    <td>{total.net.toLocaleString("ro-RO")}
+                        lei {total.net > 0 && euro ? '(' + Math.round(total.net / curs).toLocaleString("ro-RO") + '€)' : '' }
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
 
-        <tfoot>
-        <tr>
-            <th colspan="1">Venitul brut realizat</th>
-            <td>{total.incasari.toLocaleString("ro-RO")}
-                lei {total.incasari > 0 && euro ? '(' + Math.round(total.incasari / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
-        </tr>
-        <tr>
-            <th colspan="1">Taxe ({(100 - percentage).toPrecision(4)}%)</th>
-            <td>{total.taxe.toLocaleString("ro-RO")}
-                lei {total.taxe > 0 && euro ? '(' + Math.round(total.taxe / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
-        </tr>
-        <tr>
-            <th colspan="1">Venitul net realizat ({percentage}%)</th>
-            <td>{total.net.toLocaleString("ro-RO")}
-                lei {total.net > 0 && euro ? '(' + Math.round(total.net / curs).toLocaleString("ro-RO") + '€)' : '' }
-            </td>
-        </tr>
-        </tfoot>
-    </table>
-
-    {#if total.net > 0}
-        <p class="text-xs italic text-cyan-400 max-w-4xl text-center m-0 m-auto">
-            Venitul net realizat este echivalentul unui CIM(contract de munca) cu
-            salariul net de {Math.round(total.net / 12).toLocaleString("ro-RO")} lei
-            ({Math.round(total.net / 12 / curs).toLocaleString("ro-RO")}€) pe luna in conditiile in care ca si
-            angajat se beneficiaza de cel putin 21 de zile lucratoare( + zile libere oficiale). Ca si angajat trebuie
-            luat in calcul si alte beneficii care nu vin in sarcina angajatului: bonuri de masa, vouchere de vacanta,
-            comisioane, al 13-lea salariu, etc...
-        </p>
-    {/if}
-</div>
+            {#if total.net > 0}
+                <p class="text-xs italic text-cyan-400 max-w-4xl text-center m-0 m-auto">
+                    Venitul net realizat este echivalentul unui CIM(contract de munca) cu
+                    salariul net de {Math.round(total.net / 12).toLocaleString("ro-RO")} lei
+                    ({Math.round(total.net / 12 / curs).toLocaleString("ro-RO")}€) pe luna in conditiile in care ca si
+                    angajat se beneficiaza de cel putin 21 de zile lucratoare( + zile libere oficiale). Ca si angajat
+                    trebuie
+                    luat in calcul si alte beneficii care nu vin in sarcina angajatului: bonuri de masa, vouchere de
+                    vacanta,
+                    comisioane, al 13-lea salariu, etc...
+                </p>
+            {/if}
+        </div>
+    </main>
+{/if}
