@@ -64,7 +64,7 @@
 </div>
 
 {#if $isMobile}
-    <p>Momentan, formularul nu suporta interfata mobila(Rezolutie mai mica de 673 pixeli)...</p>
+    <p>Momentan, formularul nu suporta rezolutie mai mica de 673 pixeli(modul portrait). <br>Intoarceti telefonul(modul landscape).</p>
     <LottieAnimation path="portrait_landscape"/>
 {:else }
     <main>
