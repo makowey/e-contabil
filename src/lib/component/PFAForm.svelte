@@ -68,9 +68,9 @@
     <LottieAnimation path="portrait_landscape"/>
 {:else }
     <main>
-        <div class="flex gap-10">
+        <div class="grid grid-cols-2 justify-between gap-2 text-md pb-2">
             <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-                <div class="input-group-shim">Rate/h</div>
+                <div class="input-group-shim">Rate/h (€)</div>
                 <input type="number" placeholder="in euro(€)..." bind:value={rate}/>
             </div>
 
