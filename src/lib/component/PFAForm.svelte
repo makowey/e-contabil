@@ -144,7 +144,7 @@
                 </tr>
                 <tr>
                     <th colspan="1">Venitul net realizat ({percentage}%)
-                        <ProgressBar label="Progress Bar" value={percentage} max={100} track="bg-error-50-900-token"/>
+                        <ProgressBar label="Progress Bar" value={percentage} max={100} meter="bg-fuchsia-600" track="bg-error-50-900-token"/>
                     </th>
                     <td class="text-right font-bold text-indigo-100 animate-pulse">{total.net.toLocaleString("ro-RO")}
                         lei {total.net > 0 && euro ? '(' + Math.round(total.net / curs).toLocaleString("ro-RO") + '€)' : '' }
