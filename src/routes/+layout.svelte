@@ -37,9 +37,10 @@
 
     <svelte:fragment slot="pageFooter">
         <div class="">
-            <p class="text-xs animate-pulse text-left ml-2"> Inner Width: {innerWidth}, Inner Height: {innerHeight},
+            <p class="text-xs animate-pulse text-left ml-2 hidden"> Inner Width: {innerWidth}, Inner
+                Height: {innerHeight},
                 mobile: {$isMobile} </p>
-            <!--            <span class="float-right text-xs">developed by @makowey</span>-->
+<!--            <span class="float-right text-xs">developed by @makowey</span>-->
         </div>
 
     </svelte:fragment>
