@@ -72,7 +72,8 @@
     <main>
         <div class="grid grid-cols-2 justify-between gap-2 text-md pb-2">
             <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-                <div class="input-group-shim w-72">Rate/h (€)</div>
+                <div class="input-group-shim w-72">Rate/h (€) <span class="text-xs">{(rate * curs).toPrecision(4)}
+                    lei/ora</span></div>
                 <input type="number" placeholder="in euro(€)..." bind:value={rate}/>
             </div>
 
@@ -82,8 +83,8 @@
             </div>
 
             <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-                <div class="input-group-shim w-72">Salariu minim</div>
-                <input type="number" placeholder="salariu minim pe economie" bind:value={salariuMinim}/>
+                <div class="input-group-shim w-72">Salariu minim pe economie</div>
+                <input type="number" placeholder="salariu brut" bind:value={salariuMinim}/>
             </div>
 
             <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
@@ -144,7 +145,8 @@
                 </tr>
                 <tr>
                     <th colspan="1">Venitul net realizat ({percentage}%)
-                        <ProgressBar label="Progress Bar" value={percentage} max={100} meter="bg-fuchsia-600" track="bg-error-50-900-token"/>
+                        <ProgressBar label="Progress Bar" value={percentage} max={100} meter="bg-fuchsia-600"
+                                     track="bg-error-50-900-token"/>
                     </th>
                     <td class="text-right font-bold text-indigo-100 animate-pulse">{total.net.toLocaleString("ro-RO")}
                         lei {total.net > 0 && euro ? '(' + Math.round(total.net / curs).toLocaleString("ro-RO") + '€)' : '' }
@@ -153,18 +155,16 @@
                 </tfoot>
             </table>
 
-            {#if total.net > 0}
-                <p class="text-xs italic text-cyan-400 max-w-4xl text-center m-0 m-auto">
-                    Venitul net realizat este echivalentul unui CIM(contract de munca) cu
-                    salariul net de {Math.round(total.net / 12).toLocaleString("ro-RO")} lei
-                    ({Math.round(total.net / 12 / curs).toLocaleString("ro-RO")}€) pe luna in conditiile in care ca si
-                    angajat se beneficiaza de cel putin 21 de zile lucratoare( + zile libere oficiale). Ca si angajat
-                    trebuie
-                    luat in calcul si alte beneficii care nu vin in sarcina angajatului: bonuri de masa, vouchere de
-                    vacanta,
-                    comisioane, al 13-lea salariu, etc...
-                </p>
-            {/if}
+            <p class="text-xs italic text-cyan-400 max-w-4xl text-center m-0 m-auto">
+                Venitul net realizat este echivalentul unui CIM(contract de munca) cu
+                salariul net de {Math.round(total.net / 12).toLocaleString("ro-RO")} lei
+                ({Math.round(total.net / 12 / curs).toLocaleString("ro-RO")}€) pe luna in conditiile in care ca si
+                angajat se beneficiaza de cel putin 21 de zile lucratoare( + zile libere oficiale). Ca si angajat
+                trebuie
+                luat in calcul si alte beneficii care nu vin in sarcina angajatului: bonuri de masa, vouchere de
+                vacanta,
+                comisioane, al 13-lea salariu, etc...
+            </p>
         </div>
     </main>
 {/if}
