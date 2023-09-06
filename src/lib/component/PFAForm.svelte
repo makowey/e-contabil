@@ -2,6 +2,7 @@
     import Icon from '@iconify/svelte';
     import {isMobile} from "$lib/stores.js";
     import LottieAnimation from "$lib/player/LottieAnimation.svelte";
+    import {ProgressBar} from "@skeletonlabs/skeleton";
 
     export let curs = 4.95;
     export let salariuMinim = 3000;
@@ -64,7 +65,8 @@
 </div>
 
 {#if $isMobile}
-    <p class="text-xs text-warning-50 animate-pulse">Momentan, formularul nu suporta rezolutie mai mica de 673 pixeli(modul portrait). <br>Intoarceti telefonul(modul landscape).</p>
+    <p class="text-xs text-warning-50 animate-pulse">Momentan, formularul nu suporta rezolutie mai mica de 673
+        pixeli(modul portrait). <br>Intoarceti telefonul(modul landscape).</p>
     <LottieAnimation path="portrait_landscape"/>
 {:else }
     <main>
@@ -105,24 +107,26 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>Descriere</th>
-                    <th>Suma</th>
+                    <th class="text-left">Descriere</th>
+                    <th class="text-right">Suma</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td>Impozit pe venit - 10%</td>
-                    <td>{impozit}
+                    <td class="text-left">Impozit pe venit - 10%</td>
+                    <td class="text-right">{impozit}
                         lei {impozit > 0 && euro ? '(' + Math.round(impozit / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
                 </tr>
                 <tr>
-                    <td>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25% (deductibil)</td>
-                    <td>{CAS}
+                    <td class="text-left">CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25%
+                        (deductibil)
+                    </td>
+                    <td class="text-right">{CAS}
                         lei {CAS > 0 && euro ? '(' + Math.round(CAS / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
                 </tr>
                 <tr>
-                    <td>CASS plafonat la {plafonNumarLuni} de salarii minime pe economie - 10%</td>
-                    <td>{CASS}
+                    <td class="text-left">CASS plafonat la {plafonNumarLuni} de salarii minime pe economie - 10%</td>
+                    <td class="text-right">{CASS}
                         lei {CASS > 0 && euro ? '(' + Math.round(CASS / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
                 </tr>
                 </tbody>
@@ -130,17 +134,19 @@
                 <tfoot>
                 <tr>
                     <th colspan="1">Venitul brut realizat</th>
-                    <td>{total.incasari.toLocaleString("ro-RO")}
+                    <td class="text-right">{total.incasari.toLocaleString("ro-RO")}
                         lei {total.incasari > 0 && euro ? '(' + Math.round(total.incasari / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
                 </tr>
                 <tr>
                     <th colspan="1">Taxe ({(100 - percentage).toPrecision(4)}%)</th>
-                    <td>{total.taxe.toLocaleString("ro-RO")}
+                    <td class="text-right">{total.taxe.toLocaleString("ro-RO")}
                         lei {total.taxe > 0 && euro ? '(' + Math.round(total.taxe / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
                 </tr>
                 <tr>
-                    <th colspan="1">Venitul net realizat ({percentage}%)</th>
-                    <td>{total.net.toLocaleString("ro-RO")}
+                    <th colspan="1">Venitul net realizat ({percentage}%)
+                        <ProgressBar label="Progress Bar" value={percentage} max={100} track="bg-error-50-900-token"/>
+                    </th>
+                    <td class="text-right font-bold text-indigo-100 animate-pulse">{total.net.toLocaleString("ro-RO")}
                         lei {total.net > 0 && euro ? '(' + Math.round(total.net / curs).toLocaleString("ro-RO") + '€)' : '' }
                     </td>
                 </tr>
