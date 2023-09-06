@@ -70,32 +70,32 @@
     <main>
         <div class="grid grid-cols-2 justify-between gap-2 text-md pb-2">
             <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-                <div class="input-group-shim">Rate/h (€)</div>
+                <div class="input-group-shim w-72">Rate/h (€)</div>
                 <input type="number" placeholder="in euro(€)..." bind:value={rate}/>
             </div>
 
             <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-                <div class="input-group-shim">Ore/an</div>
+                <div class="input-group-shim w-72">Ore/an</div>
                 <input type="number" placeholder="ex: 1848 = 21 * 11 luni * 8 ore" bind:value={hours}/>
             </div>
 
             <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-                <div class="input-group-shim">Salariu minim</div>
+                <div class="input-group-shim w-72">Salariu minim</div>
                 <input type="number" placeholder="salariu minim pe economie" bind:value={salariuMinim}/>
             </div>
 
             <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-                <div class="input-group-shim">Plafonare(luni)</div>
+                <div class="input-group-shim w-72">Plafonare (nr. de luni)</div>
                 <input type="number" placeholder="numar de luni" bind:value={plafonNumarLuni}/>
             </div>
 
             <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-                <div class="input-group-shim truncate">Cheltuieli deductibile</div>
+                <div class="input-group-shim w-72">Cheltuieli deductibile (extra)</div>
                 <input type="number" placeholder="cheltuieli deductibile" bind:value={deductibil}/>
             </div>
 
             <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-                <div class="input-group-shim">Curs valutar(€)</div>
+                <div class="input-group-shim w-72">Curs valutar (€)</div>
                 <input type="number" placeholder="in lei..." bind:value={curs}/>
             </div>
         </div>
