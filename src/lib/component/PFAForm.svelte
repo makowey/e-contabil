@@ -9,13 +9,14 @@
     export let plafonBrut = 300000;
     export let type = "Sistem real";
     let rate = 5;
-    let hours = 1848;
 
     let total = {incasari: 0, taxe: 0, net: 0};
 
     let plafonNumarLuni = 24;
+    const zile = 21;
+    let hours = zile * 8 * 11;
     let luniPrestate = 1;
-    $: luniPrestate = (hours / 8 / 21).toFixed(1);
+    $: luniPrestate = (hours / 8 / zile).toFixed(1);
 
     let incasari = 0;
     $: incasari = rate * hours * curs;
@@ -77,8 +78,8 @@
     <main>
         <div class="grid grid-cols-2 justify-between gap-2 text-md pb-2">
             <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-                <div class="input-group-shim w-72">Rate/h (€) <span class="text-xs">{(rate * curs).toFixed(2)}
-                    lei/ora</span></div>
+                <div class="input-group-shim w-72">Rate/h (€) <span class="text-xs w-36">{(rate * curs).toFixed(2)}
+                    lei/ora, {(rate * 8 * zile)} €/luna, {Math.round(rate * 8 * zile * curs)} lei/luna({zile} z.)</span></div>
                 <input type="number" placeholder="in euro(€)..." bind:value={rate}/>
             </div>
 
