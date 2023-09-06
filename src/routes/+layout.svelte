@@ -18,7 +18,7 @@
         <!-- App Bar -->
         <AppBar>
             <svelte:fragment slot="lead">
-                <strong class="text-xl uppercase">e-Contabil</strong>
+                <a class="text-xl uppercase" href="/">e-Contabil</a>
             </svelte:fragment>
             <svelte:fragment slot="trail">
                 <a
