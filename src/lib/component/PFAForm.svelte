@@ -78,7 +78,7 @@
             </div>
 
             <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-                <div class="input-group-shim w-72">Ore/an</div>
+                <div class="input-group-shim w-72">Ore/an <span class="text-xs">{(hours / 8)} zile = ~{hours / 8 / 21} luni</span></div>
                 <input type="number" placeholder="ex: 1848 = 21 * 11 luni * 8 ore" bind:value={hours}/>
             </div>
 
