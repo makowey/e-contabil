@@ -7,7 +7,7 @@
     export let salariuMinim = 3000;
     export let plafonBrut = 300000;
     export let type = "Sistem real";
-    let rate = 15;
+    let rate = 5;
     let hours = 1848;
 
     let total = {incasari: 0, taxe: 0, net: 0};
@@ -64,7 +64,7 @@
 </div>
 
 {#if $isMobile}
-    <p class="text-xs text-warning-50">Momentan, formularul nu suporta rezolutie mai mica de 673 pixeli(modul portrait). <br>Intoarceti telefonul(modul landscape).</p>
+    <p class="text-xs text-warning-50 animate-pulse">Momentan, formularul nu suporta rezolutie mai mica de 673 pixeli(modul portrait). <br>Intoarceti telefonul(modul landscape).</p>
     <LottieAnimation path="portrait_landscape"/>
 {:else }
     <main>
