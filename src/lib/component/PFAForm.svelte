@@ -44,7 +44,7 @@
 <div class="w-3/4 lg:w-full text-left lg:text-center">
     <aside class="alert variant-filled-surface">
         <!-- Icon -->
-        <div>
+        <div class="hidden lg:block">
             <Icon icon="clarity:info-solid" width="100"/>
         </div>
         <!-- Message -->
@@ -64,7 +64,7 @@
 </div>
 
 {#if $isMobile}
-    <p>Momentan, formularul nu suporta interfata mobila...</p>
+    <p>Momentan, formularul nu suporta interfata mobila(Rezolutie mai mica de 673 pixeli)...</p>
     <LottieAnimation path="portrait_landscape"/>
 {:else }
     <main>

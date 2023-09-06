@@ -7,7 +7,7 @@
     let innerWidth = 0
     let innerHeight = 0;
 
-    $: isMobile.set(innerWidth <= 560), console.log("isMobile: ", $isMobile);
+    $: isMobile.set(innerWidth <= 673), console.log("isMobile: ", $isMobile);
 </script>
 
 <svelte:window bind:innerWidth bind:innerHeight/>
