@@ -24,7 +24,7 @@
     $: CAS = Math.round(0.25 * salariuMinim * plafonNumarLuni) + (incasari > plafonBrut ? Math.round(0.10 * (incasari - plafonBrut)) : 0);
     let CASS = 0;
     const CASS_LUNI = 60;
-    $: CASS = (incasari < CASS_LUNI * salariuMinim) ? Math.round(0.10 * incasari) : Math.round(0.10 * salariuMinim * plafonNumarLuni);
+    $: CASS = (incasari < CASS_LUNI * salariuMinim) ? Math.round(0.10 * incasari) : Math.round(0.10 * salariuMinim * CASS_LUNI);
 
     let deductibil = 0;
 
@@ -136,7 +136,7 @@
                         lei {CAS > 0 && euro ? '(' + Math.round(CAS / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
                 </tr>
                 <tr>
-                    <td class="text-left">CASS plafonat la {plafonNumarLuni} de salarii minime pe economie - 10%</td>
+                    <td class="text-left">CASS plafonat la {CASS_LUNI} de salarii minime pe economie - 10%</td>
                     <td class="text-right">{CASS}
                         lei {CASS > 0 && euro ? '(' + Math.round(CASS / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
                 </tr>
