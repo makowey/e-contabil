@@ -12,7 +12,7 @@
 
     let total = {incasari: 0, taxe: 0, net: 0};
 
-    let plafonNumarLuni = 24;
+    let plafonNumarLuni = 60;
     const zile = 21;
     let hours = zile * 8 * 11;
     let luniPrestate = 1;
@@ -23,7 +23,7 @@
     let CAS = 0;
     $: CAS = Math.round(0.25 * salariuMinim * plafonNumarLuni) + (incasari > plafonBrut ? Math.round(0.10 * (incasari - plafonBrut)) : 0);
     let CASS = 0;
-    $: CASS = Math.round(0.10 * salariuMinim * plafonNumarLuni);
+    $: CASS = (incasari < plafonNumarLuni * salariuMinim) ? Math.round(0.10 * incasari) : Math.round(0.10 * salariuMinim * plafonNumarLuni);
 
     let deductibil = 0;
 
@@ -61,9 +61,8 @@
                 <li>Impozit pe venit - 10%</li>
                 <li>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25% (deductibil)</li>
                 <li>CASS plafonat la {plafonNumarLuni} de salarii minime pe economie - 10%</li>
-                <li class="text-xs italic text-lime-300">Propunere: In cazul PFA, se mențin plafoanele actuale de 24 de
-                    salarii pentru plata CAS si CASS, dar daca venitul net depășește 60.000 euro, se plătește CASS
-                    pentru diferența de venit peste 60.000 euro.
+                <li class="text-xs italic text-lime-300">19.09.2023: Persoanele care au venituri din activități independente vor avea un nou plafon pentru plata CASS de 10%.
+                    Practic, ar urma să plătească 10% la veniturile nete dacă au sub 60 de salarii minime. Dacă au mai mult, atunci va fi plafonat la cele 60.
                 </li>
             </ul>
         </div>
@@ -79,7 +78,8 @@
         <div class="grid grid-cols-2 justify-between gap-2 text-md pb-2">
             <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
                 <div class="input-group-shim w-72">Rate/h (€) <span class="text-xs w-36">{(rate * curs).toFixed(2)}
-                    lei/ora, {(rate * 8 * zile)} €/luna, {Math.round(rate * 8 * zile * curs)} lei/luna({zile} z.)</span></div>
+                    lei/ora, {(rate * 8 * zile)} €/luna, {Math.round(rate * 8 * zile * curs)} lei/luna({zile} z.)</span>
+                </div>
                 <input type="number" placeholder="in euro(€)..." bind:value={rate}/>
             </div>
 
@@ -98,7 +98,7 @@
 
             <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
                 <div class="input-group-shim w-72">Plafonare (nr. de luni)</div>
-                <input type="number" placeholder="numar de luni" bind:value={plafonNumarLuni}/>
+                <input type="number" placeholder="numar de luni" bind:value={plafonNumarLuni} disabled/>
             </div>
 
             <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
