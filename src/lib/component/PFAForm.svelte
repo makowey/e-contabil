@@ -23,7 +23,8 @@
     let CAS = 0;
     $: CAS = Math.round(0.25 * salariuMinim * plafonNumarLuni) + (incasari > plafonBrut ? Math.round(0.10 * (incasari - plafonBrut)) : 0);
     let CASS = 0;
-    $: CASS = (incasari < plafonNumarLuni * salariuMinim) ? Math.round(0.10 * incasari) : Math.round(0.10 * salariuMinim * plafonNumarLuni);
+    const CASS_LUNI = 60;
+    $: CASS = (incasari < CASS_LUNI * salariuMinim) ? Math.round(0.10 * incasari) : Math.round(0.10 * salariuMinim * plafonNumarLuni);
 
     let deductibil = 0;
 
@@ -36,7 +37,7 @@
     $: net = incasari - taxe;
     $: net = net > 0 ? net : 0;
 
-    //$: plafonNumarLuni = incasari > (24 * salariuMinim) ? 24 : 12;
+    $: plafonNumarLuni = incasari > (24 * salariuMinim) ? 24 : 12;
 
     $: total = {incasari, taxe, net}
     let percentage = 0;
@@ -60,9 +61,9 @@
             <ul class="list">
                 <li>Impozit pe venit - 10%</li>
                 <li>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25% (deductibil)</li>
-                <li>CASS plafonat la {plafonNumarLuni} de salarii minime pe economie - 10%</li>
-                <li class="text-xs italic text-lime-300">19.09.2023: Persoanele care au venituri din activități independente vor avea un nou plafon pentru plata CASS de 10%.
-                    <br>Practic, ar urma să plătească 10% la veniturile nete dacă au sub 60 de salarii minime. Dacă au mai mult, atunci va fi plafonat la cele 60.
+                <li>CASS plafonat la {CASS_LUNI} de salarii minime pe economie - 10%</li>
+                <li class="text-xs italic text-lime-300 animate-pulse">19.09.2023: Persoanele care au venituri din activități independente vor avea un nou plafon pentru plata CASS de 10%.
+                    <br>Practic, ar urma să plătească 10% la veniturile nete dacă au sub ${CASS_LUNI} de salarii minime. Dacă au mai mult, atunci va fi plafonat la cele ${CASS_LUNI}.
                 </li>
             </ul>
         </div>
@@ -98,7 +99,7 @@
 
             <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
                 <div class="input-group-shim w-72">Plafonare (nr. de luni)</div>
-                <input type="number" placeholder="numar de luni" bind:value={plafonNumarLuni} disabled/>
+                <input type="number" placeholder="numar de luni" bind:value={plafonNumarLuni}/>
             </div>
 
             <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
