@@ -63,7 +63,7 @@
                 <li>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25% (deductibil)</li>
                 <li>CASS plafonat la {CASS_LUNI} de salarii minime pe economie - 10%</li>
                 <li class="text-xs italic text-lime-300 animate-pulse">19.09.2023: Persoanele care au venituri din activități independente vor avea un nou plafon pentru plata CASS de 10%.
-                    <br>Practic, ar urma să plătească 10% la veniturile nete dacă au sub ${CASS_LUNI} de salarii minime. Dacă au mai mult, atunci va fi plafonat la cele ${CASS_LUNI}.
+                    <br>Practic, ar urma să plătească 10% la veniturile nete dacă au sub {CASS_LUNI} de salarii minime. Dacă au mai mult, atunci va fi plafonat la cele {CASS_LUNI}.
                 </li>
             </ul>
         </div>
