@@ -29,7 +29,7 @@
     let deductibil = 0;
 
     let impozit = 0;
-    $: impozit = Math.round(0.10 * (incasari - CAS - deductibil));
+    $: impozit = Math.round(0.10 * (incasari - CAS - CASS - deductibil));
 
     let taxe = 0;
     $: taxe = impozit + CAS + CASS;
@@ -61,9 +61,11 @@
             <ul class="list">
                 <li>Impozit pe venit - 10%</li>
                 <li>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25% (deductibil)</li>
-                <li>CASS plafonat la {CASS_LUNI} de salarii minime pe economie - 10%</li>
-                <li class="text-xs italic text-lime-300 animate-pulse">19.09.2023: Persoanele care au venituri din activități independente vor avea un nou plafon pentru plata CASS de 10%.
-                    <br>Practic, ar urma să plătească 10% la veniturile nete dacă au sub {CASS_LUNI} de salarii minime. Dacă au mai mult, atunci va fi plafonat la cele {CASS_LUNI}.
+                <li>CASS plafonat la {CASS_LUNI} de salarii minime pe economie - 10% (deductibil)</li>
+                <li class="text-xs italic text-lime-300 animate-pulse">19.09.2023: Persoanele care au venituri din
+                    activități independente vor avea un nou plafon pentru plata CASS de 10%.
+                    <br>Practic, ar urma să plătească 10% la veniturile nete dacă au sub {CASS_LUNI} de salarii minime.
+                    Dacă au mai mult, atunci va fi plafonat la cele {CASS_LUNI}.
                 </li>
             </ul>
         </div>
@@ -136,7 +138,7 @@
                         lei {CAS > 0 && euro ? '(' + Math.round(CAS / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
                 </tr>
                 <tr>
-                    <td class="text-left">CASS plafonat la {CASS_LUNI} de salarii minime pe economie - 10%</td>
+                    <td class="text-left">CASS plafonat la {CASS_LUNI} de salarii minime pe economie - 10% (deductibil)</td>
                     <td class="text-right">{CASS}
                         lei {CASS > 0 && euro ? '(' + Math.round(CASS / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
                 </tr>
