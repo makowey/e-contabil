@@ -56,13 +56,13 @@
         </div>
         <!-- Message -->
         <div class="alert-message">
-            <h3 class="h3">Cod fiscal 2023 ({type})</h3>
+            <h3 class="h3">Cod fiscal 2024 ({type})</h3>
             <ul class="list">
                 <li>Impozit pe venit - 10%</li>
                 <li>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25% (deductibil)</li>
                 <li>CASS plafonat la {plafonNumarLuni} de salarii minime pe economie - 10%</li>
                 <li class="text-xs italic text-lime-300">19.09.2023: Persoanele care au venituri din activități independente vor avea un nou plafon pentru plata CASS de 10%.
-                    Practic, ar urma să plătească 10% la veniturile nete dacă au sub 60 de salarii minime. Dacă au mai mult, atunci va fi plafonat la cele 60.
+                    <br>Practic, ar urma să plătească 10% la veniturile nete dacă au sub 60 de salarii minime. Dacă au mai mult, atunci va fi plafonat la cele 60.
                 </li>
             </ul>
         </div>
