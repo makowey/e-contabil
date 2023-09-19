@@ -36,7 +36,7 @@
     $: net = incasari - taxe;
     $: net = net > 0 ? net : 0;
 
-    $: plafonNumarLuni = incasari > (24 * salariuMinim) ? 24 : 12;
+    //$: plafonNumarLuni = incasari > (24 * salariuMinim) ? 24 : 12;
 
     $: total = {incasari, taxe, net}
     let percentage = 0;
