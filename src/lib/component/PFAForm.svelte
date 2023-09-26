@@ -6,7 +6,6 @@
 
     export let curs = 4.95;
     export let salariuMinim = 3000;
-    export let plafonBrut = 300000;
     export let type = "Sistem real";
     let rate = 5;
 
@@ -21,7 +20,7 @@
     let incasari = 0;
     $: incasari = rate * hours * curs;
     let CAS = 0;
-    $: CAS = Math.round(0.25 * salariuMinim * plafonNumarLuni) + (incasari > plafonBrut ? Math.round(0.10 * (incasari - plafonBrut)) : 0);
+    $: CAS = Math.round(0.25 * salariuMinim * (plafonNumarLuni < 12 ? plafonNumarLuni : 24));
     let CASS = 0;
     const CASS_LUNI = 60;
     $: CASS = (incasari < CASS_LUNI * salariuMinim) ? Math.round(0.10 * incasari) : Math.round(0.10 * salariuMinim * CASS_LUNI);
@@ -138,7 +137,9 @@
                         lei {CAS > 0 && euro ? '(' + Math.round(CAS / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
                 </tr>
                 <tr>
-                    <td class="text-left">CASS plafonat la {CASS_LUNI} de salarii minime pe economie - 10% (deductibil)</td>
+                    <td class="text-left">CASS plafonat la {CASS_LUNI} de salarii minime pe economie - 10%
+                        (deductibil)
+                    </td>
                     <td class="text-right">{CASS}
                         lei {CASS > 0 && euro ? '(' + Math.round(CASS / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
                 </tr>
