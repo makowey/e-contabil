@@ -11,7 +11,7 @@
 
     let total = {incasari: 0, taxe: 0, net: 0};
 
-    let plafonNumarLuni = 60;
+    let plafonNumarLuni = 24;
     const zile = 21;
     let hours = zile * 8 * 11;
     let luniPrestate = 1;
@@ -20,7 +20,7 @@
     let incasari = 0;
     $: incasari = rate * hours * curs;
     let CAS = 0;
-    $: CAS = Math.round(0.25 * salariuMinim * (plafonNumarLuni < 12 ? plafonNumarLuni : 24));
+    $: CAS = Math.round(0.25 * salariuMinim * plafonNumarLuni);
     let CASS = 0;
     const CASS_LUNI = 60;
     $: CASS = (incasari < CASS_LUNI * salariuMinim) ? Math.round(0.10 * incasari) : Math.round(0.10 * salariuMinim * CASS_LUNI);
@@ -36,7 +36,7 @@
     $: net = incasari - taxe;
     $: net = net > 0 ? net : 0;
 
-    $: plafonNumarLuni = incasari > (24 * salariuMinim) ? 24 : 12;
+    $: plafonNumarLuni = incasari >= (24 * salariuMinim) ? 24 : (incasari >= (12 * salariuMinim) ? 12 : 6);
 
     $: total = {incasari, taxe, net}
     let percentage = 0;
