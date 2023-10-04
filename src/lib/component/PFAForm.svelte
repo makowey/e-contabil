@@ -5,7 +5,7 @@
     import {ProgressBar} from "@skeletonlabs/skeleton";
 
     export let curs = 4.95;
-    export let salariuMinim = 3000;
+    export let salariuMinim = 3300;
     export let type = "Sistem real";
     let rate = 5;
 
@@ -65,6 +65,9 @@
                     activități independente vor avea un nou plafon pentru plata CASS de 10%.
                     <br>Practic, ar urma să plătească 10% la veniturile nete dacă au sub {CASS_LUNI} de salarii minime.
                     Dacă au mai mult, atunci va fi plafonat la cele {CASS_LUNI}.
+                </li>
+                <li class="text-xs italic text-amber-500 animate-pulse">
+                    01.10.2023: Salariul minim pe economie a crescut la 3300 lei.
                 </li>
             </ul>
         </div>
