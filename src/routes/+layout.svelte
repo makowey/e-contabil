@@ -1,6 +1,6 @@
 <script lang="ts">
     import '../app.postcss';
-    import {AppBar, AppShell} from '@skeletonlabs/skeleton';
+    import {AppBar, AppShell, LightSwitch} from '@skeletonlabs/skeleton';
     import {isMobile} from "$lib/stores";
     import Icon from "@iconify/svelte";
 
@@ -21,6 +21,7 @@
                 <a class="text-xl uppercase" href="/">e-Contabil</a>
             </svelte:fragment>
             <svelte:fragment slot="trail">
+                <LightSwitch />
                 <a
                         class="btn btn-sm variant-ghost-surface"
                         href="mailto:makowey@games.com"
