@@ -61,12 +61,12 @@
                 <li>Impozit pe venit - 10%</li>
                 <li>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25% (deductibil)</li>
                 <li>CASS plafonat la {CASS_LUNI} de salarii minime pe economie - 10% (deductibil)</li>
-                <li class="text-xs italic text-lime-300 animate-pulse">19.09.2023: Persoanele care au venituri din
+                <li class="text-xs italic text-yellow-200">19.09.2023: Persoanele care au venituri din
                     activități independente vor avea un nou plafon pentru plata CASS de 10%.
                     <br>Practic, ar urma să plătească 10% la veniturile nete dacă au sub {CASS_LUNI} de salarii minime.
                     Dacă au mai mult, atunci va fi plafonat la cele {CASS_LUNI}.
                 </li>
-                <li class="text-xs italic text-amber-500 animate-pulse">
+                <li class="text-xs pl-3 font-bold">
                     01.10.2023: Salariul minim pe economie a crescut la 3300 lei.
                 </li>
             </ul>
