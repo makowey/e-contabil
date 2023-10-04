@@ -3,6 +3,8 @@
     import {isMobile} from "$lib/stores.js";
     import LottieAnimation from "$lib/player/LottieAnimation.svelte";
     import {ProgressBar} from "@skeletonlabs/skeleton";
+    import {fade} from 'svelte/transition';
+    import {onMount} from "svelte";
 
     export let curs = 4.95;
     export let salariuMinim = 3300;
@@ -46,33 +48,47 @@
     $: progressBar = undefined, setTimeout(() => progressBar = percentage, 1000);
 
     let euro = true;
+
+    let showMessage = true;
+
+    onMount(() => {
+        setTimeout(() => showMessage = false, 2500)
+    })
 </script>
 
-<div class="w-3/4 lg:w-full text-left lg:text-center">
-    <aside class="alert variant-filled-surface">
-        <!-- Icon -->
-        <div class="hidden lg:block">
-            <Icon icon="clarity:info-solid" width="100"/>
-        </div>
-        <!-- Message -->
-        <div class="alert-message">
-            <h3 class="h3">Cod fiscal 2024 ({type})</h3>
-            <ul class="list">
-                <li>Impozit pe venit - 10%</li>
-                <li>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25% (deductibil)</li>
-                <li>CASS plafonat la {CASS_LUNI} de salarii minime pe economie - 10% (deductibil)</li>
-                <li class="text-xs italic text-yellow-200">19.09.2023: Persoanele care au venituri din
-                    activități independente vor avea un nou plafon pentru plata CASS de 10%.
-                    <br>Practic, ar urma să plătească 10% la veniturile nete dacă au sub {CASS_LUNI} de salarii minime.
-                    Dacă au mai mult, atunci va fi plafonat la cele {CASS_LUNI}.
-                </li>
-                <li class="text-xs pl-3 font-bold">
-                    01.10.2023: Salariul minim pe economie a crescut la 3300 lei.
-                </li>
-            </ul>
-        </div>
-    </aside>
-</div>
+{#if !showMessage}
+    <div class="cursor-pointer p-0 m-0"  on:click={() => showMessage = !showMessage}>
+        <Icon icon="clarity:info-solid" width="65"/>
+    </div>
+{:else}
+    <div class="w-3/4 lg:w-full text-left lg:text-center cursor-pointer {showMessage? '' : 'hidden'}"
+         in:fade={{ delay: 200 }} out:fade={{ delay: 200 }}>
+        <aside class="alert variant-filled-warning">
+            <!-- Icon -->
+            <div class="hidden lg:block">
+                <Icon icon="clarity:info-solid" width="100"/>
+            </div>
+            <!-- Message -->
+            <div class="alert-message">
+                <h3 class="h3">Cod fiscal 2024 ({type})</h3>
+                <ul class="list">
+                    <li>Impozit pe venit - 10%</li>
+                    <li>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25% (deductibil)</li>
+                    <li>CASS plafonat la {CASS_LUNI} de salarii minime pe economie - 10% (deductibil)</li>
+                    <li class="text-xs italic">19.09.2023: Persoanele care au venituri din
+                        activități independente vor avea un nou plafon pentru plata CASS de 10%.
+                        <br>Practic, ar urma să plătească 10% la veniturile nete dacă au sub {CASS_LUNI} de salarii
+                        minime.
+                        Dacă au mai mult, atunci va fi plafonat la cele {CASS_LUNI}.
+                    </li>
+                    <li class="text-xs pl-3 font-bold">
+                        01.10.2023: Salariul minim pe economie a crescut la 3300 lei.
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+{/if}
 
 {#if $isMobile}
     <p class="text-xs text-warning-50 animate-pulse">Momentan, formularul nu suporta rezolutie mai mica de 673
