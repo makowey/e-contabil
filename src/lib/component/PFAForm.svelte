@@ -173,7 +173,7 @@
                 </tfoot>
             </table>
 
-            <p class="text-xs italic text-cyan-400 max-w-4xl text-center m-0 m-auto">
+            <div class="card variant-filled-secondary alert text-md italic max-w-4xl text-center mx-auto m-2 shadow-4xl">
                 Venitul net realizat este echivalentul unui CIM(contract de munca) cu
                 salariul net de {Math.round(total.net / 12).toLocaleString("ro-RO")} lei
                 ({Math.round(total.net / 12 / curs).toLocaleString("ro-RO")}€) pe luna in conditiile in care ca si
@@ -182,7 +182,7 @@
                 luat in calcul si alte beneficii care nu vin in sarcina angajatului: bonuri de masa, vouchere de
                 vacanta,
                 comisioane, al 13-lea salariu, etc...
-            </p>
+            </div>
         </div>
     </main>
 {/if}
