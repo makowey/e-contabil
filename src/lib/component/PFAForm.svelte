@@ -3,7 +3,7 @@
     import {isMobile} from "$lib/stores.js";
     import LottieAnimation from "$lib/player/LottieAnimation.svelte";
     import {ProgressBar} from "@skeletonlabs/skeleton";
-    import {fade} from 'svelte/transition';
+    import {fly} from 'svelte/transition';
     import {onMount} from "svelte";
 
     export let curs = 4.95;
@@ -57,12 +57,13 @@
 </script>
 
 {#if !showMessage}
-    <div class="cursor-pointer p-0 m-0"  on:click={() => showMessage = !showMessage}>
-        <Icon icon="clarity:info-solid" width="65"/>
+    <div class="cursor-pointer p-0 m-0 absolute {$isMobile ? 'hidden' : ''}" on:click={() => showMessage = !showMessage}>
+        <Icon icon="clarity:info-solid" width="55"/>
     </div>
 {:else}
     <div class="w-3/4 lg:w-full text-left lg:text-center cursor-pointer {showMessage? '' : 'hidden'}"
-         in:fade={{ delay: 200 }} out:fade={{ delay: 200 }}>
+         in:fly={{ delay: 200, y: -200 }} out:fly={{y: -200, duration: 300}}
+         on:click={() => showMessage = !showMessage}>
         <aside class="alert variant-filled-warning">
             <!-- Icon -->
             <div class="hidden lg:block">
