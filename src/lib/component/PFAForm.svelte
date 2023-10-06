@@ -57,11 +57,12 @@
 </script>
 
 {#if !showMessage}
-    <div class="cursor-pointer p-0 m-0 absolute {$isMobile ? 'hidden' : ''}" on:click={() => showMessage = !showMessage}>
+    <div class="cursor-pointer -mt-10 p-0 m-0 absolute {$isMobile ? 'hidden' : ''}" on:click={() => showMessage = !showMessage}>
+        <p class="text-sm">PFA</p>
         <Icon icon="clarity:info-solid" width="55"/>
     </div>
 {:else}
-    <div class="w-3/4 lg:w-full text-left lg:text-center cursor-pointer {showMessage? '' : 'hidden'}"
+    <div class="w-3/4 mt-5 lg:w-full text-left lg:text-center cursor-pointer {showMessage? '' : 'hidden'}"
          in:fly={{ delay: 200, y: -200 }} out:fly={{y: -200, duration: 300}}
          on:click={() => showMessage = !showMessage}>
         <aside class="alert variant-filled-warning">
