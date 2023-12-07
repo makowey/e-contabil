@@ -30,7 +30,7 @@
     let deductibil = 0;
 
     let impozit = 0;
-    $: impozit = Math.round(0.10 * (incasari - CAS - CASS - deductibil));
+    $: impozit = Math.round(0.10 * (incasari - CAS - deductibil));
 
     let taxe = 0;
     $: taxe = impozit + CAS + CASS;
@@ -76,7 +76,7 @@
                 <ul class="list">
                     <li>Impozit pe venit - 10%</li>
                     <li>CAS plafonat la {plafonNumarLuni} de salarii minime pe economie - 25% (deductibil)</li>
-                    <li>CASS plafonat la {CASS_LUNI} de salarii minime pe economie - 10% (deductibil)</li>
+                    <li>CASS plafonat la {CASS_LUNI} de salarii minime pe economie - 10%</li>
                     <li class="text-xs italic">19.09.2023: Persoanele care au venituri din
                         activități independente vor avea un nou plafon pentru plata CASS de 10%.
                         <br>Practic, ar urma să plătească 10% la veniturile nete dacă au sub {CASS_LUNI} de salarii
