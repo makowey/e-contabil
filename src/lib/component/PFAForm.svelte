@@ -159,7 +159,6 @@
                 </tr>
                 <tr>
                     <td class="text-left">CASS plafonat la {CASS_LUNI} de salarii minime pe economie - 10%
-                        (deductibil)
                     </td>
                     <td class="text-right">{CASS}
                         lei {CASS > 0 && euro ? '(' + Math.round(CASS / curs).toLocaleString("ro-RO") + '€)' : '' }</td>
