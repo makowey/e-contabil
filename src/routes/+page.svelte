@@ -19,10 +19,10 @@
             <Icon icon="openmoji:person"/>
             PFA Calculator
         </button>
-        <button class="h2 btn btn-md variant-filled-primary cursor-pointer"
+        <button class="h2 btn btn-md variant-filled-secondary cursor-pointer text-sm"
                 on:click={() => goto('/doc/pfa-vs-cim-vs-srl.xlsx')}>
-            <Icon icon="openmoji:abacus"/>
-            Excel pfa/cim/srl-simulator
+            <Icon icon="openmoji:abacus" width="48"/>
+            Excel CIM/PFA/SRL simulator
         </button>
     </div>
 </div>
